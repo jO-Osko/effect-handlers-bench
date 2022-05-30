@@ -7,12 +7,6 @@ inputs:
 #From https://docs.github.com/en/actions/guides/publishing-docker-images
 
 runs:
-  using: "composite"
-  runs-on: ubuntu-latest
-  permissions:
-    contents: read
-    packages: write
-
   steps:
     - name: Checkout repository
       uses: actions/checkout@v2
@@ -22,14 +16,16 @@ runs:
       continue-on-error: true
       # Cache across the same system
       with:
-        key: ${{ system-name }}-docker-cache-{hash}
+        key: ${{ inputs.system-name }}-docker-cache-{hash}
         restore-keys: |
-          ${{ system-name }}-docker-cache-
+          ${{ inputs.system-name }}-docker-cache-
 
     - name: Add write permission to directories
+      shell: bash
       run: |
         find . -type d -exec chmod 777 {} \;
 
-    - name: Setup ${{ system-name }} system
+    - name: Setup ${{ inputs.system-name }} system
+      shell: bash
       run: |
-        make sys_${{ system-name }}
+        make sys_${{ inputs.system-name }}

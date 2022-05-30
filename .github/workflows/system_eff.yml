@@ -19,7 +19,7 @@ jobs:
       packages: write
 
     steps:
-      - uses: .github/actions/system-builder
+      - uses: ./actions/system-builder
         with: 
           system-name: 'eff'
 

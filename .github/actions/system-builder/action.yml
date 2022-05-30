@@ -15,17 +15,17 @@ runs:
       # Ignore the failure of a step and avoid terminating the job.
       continue-on-error: true
       # Cache across the same system
-      with:
-        key: ${{ inputs.system-name }}-docker-cache-{hash}
-        restore-keys: |
-          ${{ inputs.system-name }}-docker-cache-
+      # with:
+      #   key: ${{ inputs.system-name }}-docker-cache-{hash}
+      #   restore-keys: |
+      #     ${{ inputs.system-name }}-docker-cache-
 
     - name: Add write permission to directories
       shell: bash
       run: |
         find . -type d -exec chmod 777 {} \;
 
-    - name: Setup ${{ inputs.system-name }} system
+    - name: Setup some system
       shell: bash
       run: |
         make sys_${{ inputs.system-name }}

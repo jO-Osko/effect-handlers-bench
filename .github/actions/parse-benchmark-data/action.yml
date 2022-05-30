@@ -1,0 +1,26 @@
+name: 'Read benchmark data'
+
+inputs:
+  benchmark-name:
+    required: true
+    descripton: "Name of benchmark folder, eg: 001_nqueens"
+
+outputs:
+  default-input:
+    description: "Default benchmark input parameter"
+  default-result:
+    description: "Default benchmark result"
+
+runs:
+  using: "composite"
+  steps:
+    - name: Checkout repository
+      uses: actions/checkout@v2
+
+    - name: Read input value
+      shell: bash
+      run: echo "::set-output name=default-input::$(cat benchmark_descriptions/${{ inputs.system-name }}/default.in)"
+
+    - name: Read output value
+      shell: bash
+      run: echo "::set-output name=default-output::$(cat benchmark_descriptions/${{ inputs.system-name }}/default.out)"

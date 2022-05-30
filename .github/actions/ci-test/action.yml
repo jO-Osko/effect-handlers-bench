@@ -1,0 +1,38 @@
+name: 'CI test'
+
+inputs:
+  system-name:
+    required: true
+  benchmark-name:
+    required: true
+
+#From https://docs.github.com/en/actions/guides/publishing-docker-images
+
+runs:
+  using: "composite"
+  steps:
+    - name: Checkout repository
+      uses: actions/checkout@v2
+
+    - name: "Setup the system"
+      uses: ./.github/actions/system-builder
+      with: 
+        system-name: ${{ inputs.system-name }}
+
+    - id: parse-data
+      uses: ./.github/actions/parse-benchmark-data
+      with: 
+        system-name: ${{ inputs.benchmark-name }}
+
+    - name: Run ${{ env.SYSTEM_NAME }} benchmarks
+      shell: bash
+      run: >
+        make -C benchmarks/${{ env.SYSTEM_NAME }} ci_test_${inputs.benchmark-name} ARGS=${{ steps.parse-data.outputs.default-input }} &&
+        echo "CI_TEST_OUTPUT=$(cat benchmarks/${{ env.SYSTEM_NAME }}/${inputs.benchmark-name}.out)" >> $GITHUB_ENV
+    - name: Test result
+      if: env.CI_TEST_OUTPUT != ${{ steps.parse-data.outputs.default-result }}
+      shell: bash
+      uses: actions/github-script@v3
+      with:
+        script: |
+            core.setFailed('WRONG OUTPUT')

@@ -1,0 +1,36 @@
+name: Eff 001_nqueens
+
+env: 
+  SYSTEM_NAME: eff
+  BENCHMARK_NAME: 001_nqueens
+
+# Controls when the workflow will run
+on:
+  # Triggers the workflow on push or pull request events but only for the main branch
+  push:
+  pull_request:
+    branches: [ main ]
+
+  # Allows you to run this workflow manually from the Actions tab
+  workflow_dispatch:
+
+#From https://docs.github.com/en/actions/guides/publishing-docker-images
+jobs:
+  bench-system-eff:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      packages: write
+
+    steps:
+      # Checkout the repository first
+      # Otherwise the workflow won't be able to find the action
+      # At some pont, we might want to move the actionn to global action, to 
+      # remove checkout requirement
+      - uses: actions/checkout@v2
+
+      - name: "Run CI test"
+        uses: ./.github/actions/ci-test
+        with: 
+          system-name: ${{ env.SYSTEM_NAME }}
+          benchmark-name: ${{ env.BENCHMARK_NAME }}

@@ -19,9 +19,7 @@ runs:
 
     - name: Read input value
       shell: bash
-      run: |
-       echo "$(cat benchmark_descriptions/${{ inputs.benchmark-name }}/default.in)"
-       && echo "::set-output name=default-input::$(cat benchmark_descriptions/${{ inputs.benchmark-name }}/default.in)"
+      run: echo "::set-output name=default-input::$(cat benchmark_descriptions/${{ inputs.benchmark-name }}/default.in)"
 
     - name: Read output value
       shell: bash

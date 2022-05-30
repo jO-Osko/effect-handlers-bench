@@ -29,8 +29,9 @@ runs:
       run: >
         make -C benchmarks/${{ env.SYSTEM_NAME }} ci_test_${inputs.benchmark-name} ARGS=${{ steps.parse-data.outputs.default-input }} &&
         echo "CI_TEST_OUTPUT=$(cat benchmarks/${{ env.SYSTEM_NAME }}/${inputs.benchmark-name}.out)" >> $GITHUB_ENV
+    
     - name: Test result
-      # if: env.CI_TEST_OUTPUT != ${{ steps.parse-data.outputs.default-result }}
+      if: env.CI_TEST_OUTPUT != ${{ steps.parse-data.outputs.default-result }}
       shell: bash
       uses: actions/github-script@v3
       with:

@@ -22,7 +22,7 @@ runs:
     - id: parse-data
       uses: ./.github/actions/parse-benchmark-data
       with: 
-        system-name: ${{ inputs.benchmark-name }}
+        benchmark-name: ${{ inputs.benchmark-name }}
 
     - name: Run ${{ env.SYSTEM_NAME }} benchmarks
       shell: bash

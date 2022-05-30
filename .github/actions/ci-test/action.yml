@@ -14,15 +14,15 @@ runs:
     - name: Checkout repository
       uses: actions/checkout@v2
 
-    - name: "Setup the system"
-      uses: ./.github/actions/system-builder
-      with: 
-        system-name: ${{ inputs.system-name }}
-
     - id: parse-data
       uses: ./.github/actions/parse-benchmark-data
       with: 
         benchmark-name: ${{ inputs.benchmark-name }}
+
+    - name: "Setup the system"
+      uses: ./.github/actions/system-builder
+      with: 
+        system-name: ${{ inputs.system-name }}
 
     - name: Run ${{ env.SYSTEM_NAME }} benchmarks
       shell: bash

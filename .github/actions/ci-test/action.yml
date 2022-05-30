@@ -26,7 +26,7 @@ runs:
 
     - name: Run ${{ env.SYSTEM_NAME }} benchmarks
       shell: bash
-      run: echo ${{ steps.parse-data.outputs.default-input }}
+      run: echo "BEFORE:${{ steps.parse-data.outputs.default-input }}:AFTER"
         
         
         

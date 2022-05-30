@@ -7,6 +7,7 @@ inputs:
 #From https://docs.github.com/en/actions/guides/publishing-docker-images
 
 runs:
+  using: "composite"
   steps:
     - name: Checkout repository
       uses: actions/checkout@v2

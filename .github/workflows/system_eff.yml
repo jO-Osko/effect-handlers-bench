@@ -20,20 +20,9 @@ jobs:
       packages: write
 
     steps:
-      - name: Checkout repository
-        uses: actions/checkout@v2
-
-      - uses: satackey/action-docker-layer-caching@v0.0.11
-        # Ignore the failure of a step and avoid terminating the job.
-        continue-on-error: true
-
-      - name: Add write permission to directories
-        run: |
-          find . -type d -exec chmod 777 {} \;
-
-      - name: Setup Eff system
-        run: |
-          make sys_eff
+      - uses: actions/base_ci_test_workflow@v1
+        with: 
+          system-name: 'eff'
 
       - name: Run Eff benchmarks
         run: |

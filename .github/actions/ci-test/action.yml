@@ -32,7 +32,6 @@ runs:
     
     - name: Test result
       if: env.CI_TEST_OUTPUT != ${{ steps.parse-data.outputs.default-result }}
-      shell: bash
       uses: actions/github-script@v3
       with:
         script: |

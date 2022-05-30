@@ -28,7 +28,7 @@ jobs:
       - name: "Setup the system"
         uses: ./.github/actions/system-builder
         with: 
-          system-name: 'eff'
+          system-name: eff
 
       - name: Run Eff benchmarks
         run: |

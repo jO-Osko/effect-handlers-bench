@@ -19,8 +19,8 @@ runs:
 
     - name: Read input value
       shell: bash
-      run: echo "::set-output name=default-input::$(cat benchmark_descriptions/${{ inputs.system-name }}/default.in)"
+      run: echo "::set-output name=default-input::$(cat benchmark_descriptions/${{ inputs.benchmark-name }}/default.in)"
 
     - name: Read output value
       shell: bash
-      run: echo "::set-output name=default-output::$(cat benchmark_descriptions/${{ inputs.system-name }}/default.out)"
+      run: echo "::set-output name=default-output::$(cat benchmark_descriptions/${{ inputs.benchmark-name }}/default.out)"

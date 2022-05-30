@@ -1,5 +1,8 @@
 name: Eff
 
+env: 
+  SYSTEM_NAME : eff
+
 # Controls when the workflow will run
 on:
   # Triggers the workflow on push or pull request events but only for the main branch
@@ -28,8 +31,8 @@ jobs:
       - name: "Setup the system"
         uses: ./.github/actions/system-builder
         with: 
-          system-name: eff
+          system-name: ${{ env.SYSTEM_NAME }}
 
-      - name: Run Eff benchmarks
+      - name: Run ${{ env.SYSTEM_NAME }} benchmarks
         run: |
-          make ci_bench_eff
+          make ci_bench_${{ env.SYSTEM_NAME }}

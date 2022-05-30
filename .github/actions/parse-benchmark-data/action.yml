@@ -8,8 +8,10 @@ inputs:
 outputs:
   default-input:
     description: "Default benchmark input parameter"
+    value: ${{ steps.read-input-value.outputs.default-input }}
   default-result:
     description: "Default benchmark result"
+    value: ${{ steps.read-output-value.outputs.default-output }}
 
 runs:
   using: "composite"
@@ -18,9 +20,11 @@ runs:
       uses: actions/checkout@v2
 
     - name: Read input value
+      id: read-input-value
       shell: bash
       run: echo "::set-output name=default-input::$(cat benchmark_descriptions/${{ inputs.benchmark-name }}/default.in)"
 
     - name: Read output value
+      id: read-output-value
       shell: bash
       run: echo "::set-output name=default-output::$(cat benchmark_descriptions/${{ inputs.benchmark-name }}/default.out)"

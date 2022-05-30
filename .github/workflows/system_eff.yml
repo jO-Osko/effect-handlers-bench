@@ -19,14 +19,17 @@ jobs:
       packages: write
 
     steps:
-      # Checkout the repository first
-      # Otherwise the workflow won't be able to find the action
-      - use: actions/checkout@v2
+    # Checkout the repository first
+    # Otherwise the workflow won't be able to find the action
+    # At some pont, we might want to move the actionn to global action, to 
+    # remove checkout requirement
+    - use: actions/checkout@v2
 
-      - uses: ./actions/system-builder
-        with: 
-          system-name: 'eff'
+    - name: "Setup the system"
+      uses: ./actions/system-builder
+      with: 
+        system-name: 'eff'
 
-      - name: Run Eff benchmarks
-        run: |
-          make ci_bench_eff
+    - name: Run Eff benchmarks
+      run: |
+        make ci_bench_eff

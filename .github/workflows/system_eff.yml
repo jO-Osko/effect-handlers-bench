@@ -19,7 +19,7 @@ jobs:
       packages: write
 
     steps:
-      - uses: actions/base_ci_test_workflow@v1
+      - uses: ./actions/system-builder
         with: 
           system-name: 'eff'
 

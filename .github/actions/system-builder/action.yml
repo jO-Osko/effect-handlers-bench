@@ -20,6 +20,11 @@ runs:
     - uses: satackey/action-docker-layer-caching@v0.0.11
       # Ignore the failure of a step and avoid terminating the job.
       continue-on-error: true
+      # Cache across the same system
+      with:
+        key: ${{ system-name }}-docker-cache-{hash}
+        restore-keys: |
+          ${{ system-name }}-docker-cache-
 
     - name: Add write permission to directories
       run: |
@@ -28,4 +33,3 @@ runs:
     - name: Setup ${{ system-name }} system
       run: |
         make sys_${{ system-name }}
-

@@ -26,12 +26,9 @@ runs:
 
     - name: Run ${{ env.SYSTEM_NAME }} benchmarks
       shell: bash
-      run: echo "BEFORE:${{ steps.parse-data.outputs.default-input }}:AFTER"
-        
-        
-        
-#        #make -C benchmarks/${{ env.SYSTEM_NAME }} ci_test_${{ inputs.benchmark-name }} ARGS=${{ steps.parse-data.outputs.default-input }} &&
-#        echo "CI_TEST_OUTPUT=$(cat benchmarks/${{ env.SYSTEM_NAME }}/${{ inputs.benchmark-name }}.out)" >> $GITHUB_ENV
+      run: > 
+        make -C benchmarks/${{ env.SYSTEM_NAME }} ci_test_${{ inputs.benchmark-name }} ARGS=${{ steps.parse-data.outputs.default-input }} &&
+        echo "CI_TEST_OUTPUT=$(cat benchmarks/${{ env.SYSTEM_NAME }}/${{ inputs.benchmark-name }}.out)" >> $GITHUB_ENV
     
     - name: Test result
       if: env.CI_TEST_OUTPUT != ${{ steps.parse-data.outputs.default-result }}

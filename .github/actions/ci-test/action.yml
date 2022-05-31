@@ -37,7 +37,7 @@ runs:
         echo "CI_TEST_CORRECT_OUTPUT=${{ steps.parse-data.outputs.default-result }}" >> $GITHUB_ENV
     
     - name: Test result
-      if: env.CI_TEST_OUTPUT != ${{ steps.parse-data.outputs.default-result }}
+      if: ${{ env.CI_TEST_OUTPUT }} != ${{ steps.parse-data.outputs.default-result }}
       uses: actions/github-script@v3
       with:
         script: |

@@ -24,6 +24,11 @@ runs:
       with: 
         system-name: ${{ inputs.system-name }}
 
+    - name: Add write permission to directories
+      shell: bash
+      run: |
+        find . -type d -exec chmod 777 {} \;
+
     - name: Run ${{ env.SYSTEM_NAME }} benchmarks
       shell: bash
       run: > 

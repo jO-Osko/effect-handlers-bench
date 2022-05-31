@@ -16,7 +16,7 @@ ci_bench_eff: sys_eff
 
 ci_test_eff:
 	docker run -v $(shell pwd):/source $(DOCKERHUB):eff \
-		make -C /source/benchmarks/eff ci_test_$(BENCHMARK-NAME) ARGS=$(ARGS)
+		make -C /source/benchmarks/eff ci_test BENCHMARK-NAME=$(BENCHMARK-NAME) ARGS=$(ARGS)
 
 # Handlers in Action
 sys_hia:

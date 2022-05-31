@@ -18,8 +18,7 @@ on:
 jobs:
   bench-system-eff:
     runs-on: ubuntu-latest
-    container:
-      options: --user 1001
+
     permissions:
       contents: read
       packages: write

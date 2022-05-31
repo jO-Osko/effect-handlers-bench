@@ -24,16 +24,16 @@ jobs:
         contents: write
         packages: write
 
-      steps:
-        # Checkout the repository first
-        # Otherwise the workflow won't be able to find the action
-        # At some pont, we might want to move the actionn to global action, to 
-        # remove checkout requirement
-        - uses: actions/checkout@v2
+    steps:
+      # Checkout the repository first
+      # Otherwise the workflow won't be able to find the action
+      # At some pont, we might want to move the actionn to global action, to 
+      # remove checkout requirement
+      - uses: actions/checkout@v2
 
-        - name: "Run CI test"
-          uses: ./.github/actions/ci-test
-          with: 
-            system-name: ${{ matrix.system }}
-            benchmark-name: ${{ matrix.benchmark }}
-            GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      - name: "Run CI test"
+        uses: ./.github/actions/ci-test
+        with: 
+          system-name: ${{ matrix.system }}
+          benchmark-name: ${{ matrix.benchmark }}
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}

@@ -17,12 +17,12 @@ jobs:
       matrix:
         system: [ eff ]
         benchmark: [ 001_nqueens, 002_generator, 003_tree, 004_triples, 007_simple_counter ] 
-      runs-on: ubuntu-latest
+    runs-on: ubuntu-latest
 
-      permissions:
-        # This is needd to publish shields
-        contents: write
-        packages: write
+    permissions:
+      # This is needd to publish shields
+      contents: write
+      packages: write
 
     steps:
       # Checkout the repository first

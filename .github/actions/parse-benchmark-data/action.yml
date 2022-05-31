@@ -16,8 +16,7 @@ outputs:
 runs:
   using: "composite"
   steps:
-    - name: Checkout repository
-      uses: actions/checkout@v2
+    # Assumes checked repository
 
     - name: Read input value
       id: read-input-value

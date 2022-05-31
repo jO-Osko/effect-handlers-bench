@@ -19,11 +19,17 @@ all:
 	mkdir -p ../../results
 	mv eff.csv ../../results
 
-ci_test_001_nqueen:
-	rm benchmarks/001_nqueens/generated_001_nqueens.ml
-	eff.exe --no-stdlib --compile-plain-ocaml benchmarks/001_nqueens/001_nqueens.eff | opam exec -- ocamlformat - --name=temp.ml --enable-outside-detected-project > benchmarks/001_nqueens/generated_001_nqueens.ml
+ci_test: compile_eff_file compile_ocaml_files run_compiled_file
+
+compile_eff_file:
+	rm benchmarks/$(BENCHMARK-NAME)/generated_$(BENCHMARK-NAME).ml
+	eff.exe --no-stdlib --compile-plain-ocaml benchmarks/$(BENCHMARK-NAME)/$(BENCHMARK-NAME).eff | opam exec -- ocamlformat - --name=temp.ml --enable-outside-detected-project > benchmarks/$(BENCHMARK-NAME)/generated_$(BENCHMARK-NAME).ml
+
+compile_ocaml_files:
 	opam exec -- dune build
-	./_build/default/benchmarks/001_nqueens/wrapper_001_nqueens.exe $(ARGS) > 001_nqueens.out
+
+run_compiled_file:
+	./_build/default/benchmarks/$(BENCHMARK-NAME)/wrapper_$(BENCHMARK-NAME).exe $(ARGS) > $(BENCHMARK-NAME).out
 
 clean:
 	opam exec -- dune clean

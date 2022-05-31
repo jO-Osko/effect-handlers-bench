@@ -14,6 +14,8 @@ on:
 jobs:
   benchmark-badges:
     strategy:
+      # Parralel runs impose problems when pushing data to
+      max-parallel: 1
       matrix:
         system: [ eff ]
         benchmark: [ 001_nqueens, 002_generator, 003_tree, 004_triples, 007_simple_counter ] 

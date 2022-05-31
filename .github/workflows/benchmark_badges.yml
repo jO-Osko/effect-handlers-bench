@@ -1,0 +1,39 @@
+name: Benchmark badges
+
+# Controls when the workflow will run
+on:
+  # Triggers the workflow on push or pull request events but only for the main branch
+  push:
+  pull_request:
+    branches: [ main ]
+
+  # Allows you to run this workflow manually from the Actions tab
+  workflow_dispatch:
+
+#From https://docs.github.com/en/actions/guides/publishing-docker-images
+jobs:
+  benchmark-badges:
+    strategy:
+      matrix:
+        system: [ eff ]
+        benchmark: [ 001_nqueens, 002_generator, 003_tree, 004_triples, 007_simple_counter ] 
+      runs-on: ubuntu-latest
+
+      permissions:
+        # This is needd to publish shields
+        contents: write
+        packages: write
+
+      steps:
+        # Checkout the repository first
+        # Otherwise the workflow won't be able to find the action
+        # At some pont, we might want to move the actionn to global action, to 
+        # remove checkout requirement
+        - uses: actions/checkout@v2
+
+        - name: "Run CI test"
+          uses: ./.github/actions/ci-test
+          with: 
+            system-name: ${{ matrix.system }}
+            benchmark-name: ${{ matrix.benchmark }}
+            GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}

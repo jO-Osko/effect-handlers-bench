@@ -20,7 +20,8 @@ jobs:
     runs-on: ubuntu-latest
 
     permissions:
-      contents: read
+      # This is needd to publish shields
+      contents: write
       packages: write
 
     steps:

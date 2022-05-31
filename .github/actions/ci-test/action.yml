@@ -65,7 +65,7 @@ runs:
         ICON: ':x:'
         STATUS: 'WA :white_check_mark:'
         COLOR: red
-        GITHUB_TOKEN: ${{ env.GITHUB_TOKEN }}
+        GITHUB_TOKEN: ${{ inputs.GITHUB_TOKEN }}
       # Workarund for passing the token: https://github.com/actions/runner/issues/1557
       env:
         GITHUB_TOKEN:  ${{ inputs.GITHUB_TOKEN }}

@@ -9,10 +9,6 @@ inputs:
     description: 'Github token'
     required: true
 
-
-env:
-  GITHUB_TOKEN:  ${{ inputs.GITHUB_TOKEN }}
-
 #From https://docs.github.com/en/actions/guides/publishing-docker-images
 
 runs:
@@ -53,6 +49,9 @@ runs:
         STATUS: 'OK :white_check_mark:'
         COLOR: green
         GITHUB_TOKEN: ${{ inputs.GITHUB_TOKEN }}
+      # Workarund for passing the token: https://github.com/actions/runner/issues/1557
+      env:
+        GITHUB_TOKEN:  ${{ inputs.GITHUB_TOKEN }}
 
     - name: Set OK badge
       if: ${{ env.CI_TEST_OUTPUT != steps.parse-data.outputs.default-result }}
@@ -64,6 +63,9 @@ runs:
         STATUS: 'WA :white_check_mark:'
         COLOR: red
         GITHUB_TOKEN: ${{ env.GITHUB_TOKEN }}
+      # Workarund for passing the token: https://github.com/actions/runner/issues/1557
+      env:
+        GITHUB_TOKEN:  ${{ inputs.GITHUB_TOKEN }}
 
     - name: Test result
       if: ${{ env.CI_TEST_OUTPUT != steps.parse-data.outputs.default-result }}

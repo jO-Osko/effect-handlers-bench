@@ -9,7 +9,7 @@ on:
 jobs:
   badge_job:
     runs-on: ubuntu-latest
-    permissions: write-all
+    # permissions: write-all
     steps:
       - id: date
         run: echo "##[set-output name=data;]$(date)"

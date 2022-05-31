@@ -36,3 +36,4 @@ jobs:
           system-name: ${{ env.SYSTEM_NAME }}
           benchmark-name: ${{ env.BENCHMARK_NAME }}
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+ 

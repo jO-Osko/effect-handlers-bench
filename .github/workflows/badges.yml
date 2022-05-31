@@ -10,7 +10,7 @@ jobs:
   badge_job:
     runs-on: ubuntu-latest
 
-    permissions: write-all
+    permissions:
       contents: write
       packages: write
 

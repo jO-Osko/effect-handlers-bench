@@ -9,6 +9,9 @@ on:
 jobs:
   badge_job:
     runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      packages: write
     steps:
       - id: date
         run: echo "##[set-output name=data;]$(date)"
@@ -19,4 +22,4 @@ jobs:
           LABEL: 'Updated at'
           STATUS: ${{ steps.date.outputs.data }}
           COLOR: 00EEFF
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GITHUB_TOKEN: ${{ secrets.ACTION_TOKEN }}

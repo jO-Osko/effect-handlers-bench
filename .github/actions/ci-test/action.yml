@@ -36,6 +36,28 @@ runs:
         echo "CI_TEST_OUTPUT=$(cat benchmarks/${{ env.SYSTEM_NAME }}/${{ inputs.benchmark-name }}.out)" >> $GITHUB_ENV && 
         echo "CI_TEST_CORRECT_OUTPUT=${{ steps.parse-data.outputs.default-result }}" >> $GITHUB_ENV
     
+    - name: Set OK badge
+      if: ${{ env.CI_TEST_OUTPUT == steps.parse-data.outputs.default-result }}
+      uses: RubbaBoy/BYOB@v1.2.1
+        with:
+          NAME: ${{ env.SYSTEM_NAME }}-${{ inputs.benchmark-name }}
+          LABEL: ''
+          ICON: ':white_check_mark:'
+          STATUS: 'OK :white_check_mark:'
+          COLOR: green
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+    - name: Set OK badge
+      if: ${{ env.CI_TEST_OUTPUT != steps.parse-data.outputs.default-result }}
+      uses: RubbaBoy/BYOB@v1.2.1
+        with:
+          NAME: ${{ env.SYSTEM_NAME }}-${{ inputs.benchmark-name }}
+          LABEL: ''
+          ICON: ':x:'
+          STATUS: 'WA :white_check_mark:'
+          COLOR: red
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
     - name: Test result
       if: ${{ env.CI_TEST_OUTPUT != steps.parse-data.outputs.default-result }}
       uses: actions/github-script@v3

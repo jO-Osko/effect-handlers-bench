@@ -50,9 +50,6 @@ runs:
         STATUS: 'OK'
         COLOR: green
         GITHUB_TOKEN: ${{ inputs.GITHUB_TOKEN }}
-      # Workarund for passing the token: https://github.com/actions/runner/issues/1557
-      env:
-        GITHUB_TOKEN:  ${{ inputs.GITHUB_TOKEN }}
 
     - name: Set WA badge
       if: ${{ env.CI_TEST_OUTPUT != steps.parse-data.outputs.default-result }}
@@ -60,13 +57,11 @@ runs:
       with:
         NAME: ${{ env.SYSTEM_NAME }}-${{ inputs.benchmark-name }}
         LABEL: ''
-        ICON: ':x:'
-        STATUS: 'WA :white_check_mark:'
-        COLOR: red
+        # https://openmoji.org/library/emoji-274C/
+        ICON: 'data:image/svg+xml;base64,PHN2ZyBpZD0iZW1vamkiIHZpZXdCb3g9IjAgMCA3MiA3MiIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KICA8ZyBpZD0iY29sb3IiPgogICAgPHBhdGggZmlsbD0iI2VhNWE0NyIgZD0ibTU4LjE0IDIxLjc4LTcuNzYtOC4wMTMtMTQuMjkgMTQuMjItMTQuMjItMTQuMjItOC4wMTMgOC4wMTMgMTQuMzYgMTQuMjItMTQuMzYgMTQuMjIgOC4wMTQgOC4wMTMgMTQuMjItMTQuMjIgMTQuMjkgMTQuMjIgNy43Ni04LjAxMy0xNC4yMi0xNC4yMnoiLz4KICA8L2c+CiAgPGcgaWQ9ImhhaXIiLz4KICA8ZyBpZD0ic2tpbiIvPgogIDxnIGlkPSJza2luLXNoYWRvdyIvPgogIDxnIGlkPSJsaW5lIj4KICAgIDxwYXRoIGZpbGw9Im5vbmUiIHN0cm9rZT0iIzAwMCIgc3Ryb2tlLWxpbmVjYXA9InJvdW5kIiBzdHJva2UtbGluZWpvaW49InJvdW5kIiBzdHJva2UtbWl0ZXJsaW1pdD0iMTAiIHN0cm9rZS13aWR0aD0iMiIgZD0ibTU4LjE0IDIxLjc4LTcuNzYtOC4wMTMtMTQuMjkgMTQuMjItMTQuMjItMTQuMjItOC4wMTMgOC4wMTMgMTQuMzUgMTQuMjItMTQuMzUgMTQuMjIgOC4wMTQgOC4wMTMgMTQuMjItMTQuMjIgMTQuMjkgMTQuMjIgNy43Ni04LjAxMy0xNC4yMi0xNC4yMnoiLz4KICA8L2c+Cjwvc3ZnPgo='
+        STATUS: 'WA'
+        COLOR: orange
         GITHUB_TOKEN: ${{ inputs.GITHUB_TOKEN }}
-      # Workarund for passing the token: https://github.com/actions/runner/issues/1557
-      env:
-        GITHUB_TOKEN:  ${{ inputs.GITHUB_TOKEN }}
 
     - name: Test result
       if: ${{ env.CI_TEST_OUTPUT != steps.parse-data.outputs.default-result }}

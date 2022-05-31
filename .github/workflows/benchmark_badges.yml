@@ -22,15 +22,11 @@ jobs:
     runs-on: ubuntu-latest
 
     permissions:
-      # This is needd to publish shields
+      # This is needed to publish shields
       contents: write
       packages: write
 
     steps:
-      # Checkout the repository first
-      # Otherwise the workflow won't be able to find the action
-      # At some pont, we might want to move the actionn to global action, to 
-      # remove checkout requirement
       - uses: actions/checkout@v2
 
       - name: "Run CI test"

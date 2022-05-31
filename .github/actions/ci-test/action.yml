@@ -9,6 +9,10 @@ inputs:
     description: 'Github token'
     required: true
 
+
+env:
+  GITHUB_TOKEN:  ${{ inputs.GITHUB_TOKEN }}
+
 #From https://docs.github.com/en/actions/guides/publishing-docker-images
 
 runs:
@@ -59,7 +63,7 @@ runs:
         ICON: ':x:'
         STATUS: 'WA :white_check_mark:'
         COLOR: red
-        GITHUB_TOKEN: ${{ inputs.GITHUB_TOKEN }}
+        GITHUB_TOKEN: ${{ env.GITHUB_TOKEN }}
 
     - name: Test result
       if: ${{ env.CI_TEST_OUTPUT != steps.parse-data.outputs.default-result }}

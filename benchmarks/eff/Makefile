@@ -20,7 +20,7 @@ all:
 	mv eff.csv ../../results
 
 ci_test_001_nqueens:
-	rm benchmarks/001_nqueens/generated_001_nqueens_.ml
+	rm benchmarks/001_nqueens/generated_001_nqueens.ml
 	eff.exe --no-stdlib --compile-plain-ocaml benchmarks/001_nqueens/001_nqueens.eff | opam exec -- ocamlformat - --name=temp.ml --enable-outside-detected-project > benchmarks/001_nqueens/generated_001_nqueens_.ml
 	opam exec -- dune build
 	./_build/default/benchmarks/001_nqueens/wrapper_001_nqueens.exe $(ARGS) > 001_queens.out

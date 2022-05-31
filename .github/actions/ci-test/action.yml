@@ -33,7 +33,8 @@ runs:
       shell: bash
       run: > 
         make ci_test_${{ inputs.system-name }} BENCHMARK-NAME=${{ inputs.benchmark-name }} ARGS=${{ steps.parse-data.outputs.default-input }} &&
-        echo "CI_TEST_OUTPUT=$(cat benchmarks/${{ env.SYSTEM_NAME }}/${{ inputs.benchmark-name }}.out)" >> $GITHUB_ENV
+        echo "CI_TEST_OUTPUT=$(cat benchmarks/${{ env.SYSTEM_NAME }}/${{ inputs.benchmark-name }}.out)" >> $GITHUB_ENV && 
+        echo "CI_TEST_CORRECT_OUTPUT=${{ steps.parse-data.outputs.default-result }}" >> $GITHUB_ENV
     
     - name: Test result
       if: env.CI_TEST_OUTPUT != ${{ steps.parse-data.outputs.default-result }}

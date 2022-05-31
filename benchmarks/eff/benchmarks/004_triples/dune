@@ -1,5 +1,5 @@
 (executable
- (name 004_triples)
+ (name wrapper_004_triples)
  (libraries OcamlHeader)
  (ocamlopt_flags
   (:standard -O3)))

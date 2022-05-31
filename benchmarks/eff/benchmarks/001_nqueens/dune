@@ -1,5 +1,5 @@
 (executable
- (name nqueens)
+ (name 001_nqueens)
  (libraries OcamlHeader)
  (ocamlopt_flags
   (:standard -O3)))

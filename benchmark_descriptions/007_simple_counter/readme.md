@@ -32,7 +32,7 @@ with
   | effect (Increment j) k -> op j (continue k ()))
 ```
 
-The full benchmark is repeated `1000` times, each time, the result from the previous run is taken as the `initial_value`. The initial `initial_value` is `0`. 
+The full benchmark is repeated `1000` times, each time, the result from the previous run is taken as the `initial_value`. The initial `initial_value` is `0`.
 
 Try to call the repeating part of the program in a tail recursive way, as the stack size of `looper` is expected to be linear in `n`.  The main purpose of `op` is to thwart any optimizations performed by compilers to inline the resuming call.
 
